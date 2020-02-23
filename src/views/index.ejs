@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Accounts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+</head>
+
+<body>
+
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>email</th>
+                <th>full name</th>
+            </tr>
+        </thead>
+        <% if(users !== null){ %>
+            <tbody>
+                <% for( i = 0; i < users.length; i++){ %>
+                    <tr>
+                        <td>
+                            <%= i + 1 %>
+                        </td>
+                        <td>
+                            <%= users[i].email %>
+                        </td>
+                        <td>
+                            <%= users[i].fullName %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+            <% } %>
+    </table>
+
+</body>
+
+</html>
