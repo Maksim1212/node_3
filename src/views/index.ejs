@@ -9,108 +9,15 @@
 </head>
 
 <body>
-    <table class="striped">
-        <thead>
-            <div class="row">
-                <form class="col s12" method="POST" action="/v1/users">
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input name="email" type="text">
-                            <label>user Email</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input name="fullName" type="text">
-                            <label>full Name</label>
-                        </div>
-                        <div>
-                            <input type="submit" value="Add New User">
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-            <tr>
-                <th>#</th>
-                <th>email</th>
-                <th></th>
-                <th>full name</th>
-                <th></th>
-            </tr>
-        </thead>
-        <% if(users !== null){ %>
-            <tbody>
-                <% for( i = 0; i < users.length; i++){ %>
-                    <tr>
-                        <td>
-                            <%= i + 1 %>
-                        </td>
-                        <td>
-                            <%= users[i].email %>
-                        </td>
-                        <td>
-                            <!-- Modal Trigger -->
-                            <a class="waves-effect waves-light btn modal-trigger" href="#modal2 <%=i%>">update</a>
-                        </td>
-                        <!-- Modal Structure -->
-                        <div id="modal2 <%=i%>" class="modal">
-                            <div class="modal-content">
-                                <p>
-                                    <%= i +1 %>
-                                </p>
-                                <form method="POST" action="./users/update">
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            <input type="hidden" placeholder="userID" name="id" value="<%= users[i]._id %>">
-                                            <input name="fullName" value="<%= users[i].fullName%>" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a class="modal-close waves-effect waves-green btn-flat" style="background-color: #26a69a;">Cancel</a>
-                                        <input type="submit" value="update">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <td>
-                            <%= users[i].fullName %>
-                        </td>
-                        <td>
-                            <!-- Modal Trigger -->
-                            <a class="waves-effect waves-light btn modal-trigger" href="#modal3<%=i%>">delete</a>
-                        </td>
-                        <!-- Modal Structure -->
-                        <div id="modal3<%=i%>" class="modal">
-                            <div class="modal-content">
-                                <p>
-                                    User "
-                                    <%= users[i].fullName %>" will be deleted, you confirm this action ?
-                                </p>
-                                <form method="POST" action="./users/delete">
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            <input type="hidden" placeholder="userID" name="id" value="<%= users[i]._id %>">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a class="modal-close waves-effect waves-green btn-flat" style="background-color: #26a69a;">Сancel</a>
-                                        <input type="submit" value="delete">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </tr>
-                    <% } %>
-            </tbody>
-            <% } %>
-    </table>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.modal').modal();
-        });
-    </script>
+    <%- include('users.ejs') %>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.modal').modal();
+            });
+        </script>
 </body>
 
 </html>
