@@ -77,13 +77,14 @@ async function create(req, res, next) {
         }
 
         const user = await UserService.create(req.body);
-
         return res.status(200).json({
             data: user,
         });
     } catch (error) {
         if (error instanceof ValidationError) {
-            return res.status(422).json({
+            const users = await UserService.findAll();
+            res.status(422).render('index.ejs', {
+                users,
                 message: error.name,
                 details: error.message,
             });

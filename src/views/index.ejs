@@ -12,23 +12,30 @@
 
     <table class="striped">
         <thead>
-            <!-- Modal Trigger -->
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Add</a>
-            <!-- Modal Structure -->
-            <div id="modal1" class="modal modal-fixed-footer">
-                <div class="modal-content">
-                    <p>A bunch of text</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                </div>
+            <div class="row">
+                <form class="col s12" method="POST" action="/v1/users">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input name="email" type="text">
+                            <label>user Email</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input name="fullName" type="text">
+                            <label>full Name</label>
+                        </div>
+                        <div>
+                            <input type="submit" value="Add New User">
+                        </div>
+                    </div>
+
+                </form>
             </div>
-            <tr>
-                <th>#</th>
-                <th>email</th>
-                <th></th>
-                <th>full name</th>
-                <th></th>
+
+            <th>#</th>
+            <th>email</th>
+            <th></th>
+            <th>full name</th>
+            <th></th>
             </tr>
         </thead>
         <% if(users !== null){ %>
@@ -43,11 +50,13 @@
                         </td>
                         <td>
                             <!-- Modal Trigger -->
-                            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">update</a>
+                            <a class="waves-effect waves-light btn modal-trigger" href="#modal2">update</a>
                             <!-- Modal Structure -->
-                            <div id="modal1" class="modal modal-fixed-footer">
+                            <div id="modal2" class="modal modal-fixed-footer">
                                 <div class="modal-content">
-                                    <p>A bunch of text</p>
+                                    <p>
+                                        <%= i +1 %>
+                                    </p>
                                 </div>
                                 <div class="modal-footer">
                                     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
@@ -59,14 +68,16 @@
                         </td>
                         <td>
                             <!-- Modal Trigger -->
-                            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">delete</a>
+                            <a class="waves-effect waves-light btn modal-trigger" href="#modal3">delete</a>
                             <!-- Modal Structure -->
-                            <div id="modal1" class="modal modal-fixed-footer">
+                            <div id="modal3" class="modal modal-fixed-footer">
                                 <div class="modal-content">
-                                    <p>A bunch of text</p>
+                                    <p>User
+                                    </p>
+                                    <input value=""></input>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">I Agree</a>
                                 </div>
                             </div>
                         </td>
