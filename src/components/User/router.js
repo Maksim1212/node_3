@@ -36,8 +36,11 @@ router.get('/:id', UserComponent.findById);
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware
  */
-router.post('/create', UserComponent.create);
-
+// router.post('/create', UserComponent.create);
+router.post('/create', (req, res) => {
+    UserComponent.create(req, res);
+    res.redirect('./');
+});
 /**
  * Route serving a new user
  * @name /v1/users
@@ -46,7 +49,10 @@ router.post('/create', UserComponent.create);
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware
  */
-router.post('/update', UserComponent.updateById);
+router.post('/update', (req, res) => {
+    UserComponent.updateById(req, res);
+    res.redirect('./');
+});
 
 /**
  * Route serving a new user
@@ -56,6 +62,9 @@ router.post('/update', UserComponent.updateById);
  * @param {string} path -Express path
  * @param {callback} middleware - Express middleware
  */
-router.post('/delete', UserComponent.deleteById);
+router.post('/delete', (req, res) => {
+    UserComponent.deleteById(req, res);
+    res.redirect('./');
+});
 
 module.exports = router;
