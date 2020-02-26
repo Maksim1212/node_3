@@ -13,11 +13,9 @@ async function findAll(req, res, next) {
     try {
         const users = await UserService.findAll();
         res.status(200).render('index.ejs', { users });
-        // res.status(200).json({data: users,});
     } catch (error) {
-        res.status(500).json({
-            error: error.message,
-            details: null,
+        req.flash('error', {
+            message: error,
         });
 
         next(error);
@@ -81,17 +79,14 @@ async function create(req, res, next) {
         return res.redirect('/v1/users');
     } catch (error) {
         if (error instanceof ValidationError) {
-            res.status(422).render('index.ejs', {
-                message: error.name,
-                details: error.message,
-            });
+            req.flash('error', error.message);
+            return res.redirect('/v1/users');
         }
 
-        res.status(500).json({
-            message: error.name,
-            details: error.message,
+        res.flash('error', {
+            message: error,
         });
-
+        res.redirect('v1/users');
         return next(error);
     }
 }

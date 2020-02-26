@@ -5,6 +5,9 @@ const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
+const session = require('express-session');
+
 
 module.exports = {
     /**
@@ -31,6 +34,14 @@ module.exports = {
         app.use(cors());
         // cors
         app.use(methodOverride('_method'));
+        // override method
+        app.use(session({
+            cookie: { maxAge: 60000 },
+            secret: 'keyboard cat',
+            resave: false,
+            saveUninitialized: true,
+        }));
+        app.use(flash());
         app.use((req, res, next) => {
             res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS ');
             res.header('Access-Control-Allow-Credentials', '*');
