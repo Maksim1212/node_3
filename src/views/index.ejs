@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <table class="striped">
         <thead>
             <div class="row">
@@ -30,12 +29,12 @@
 
                 </form>
             </div>
-
-            <th>#</th>
-            <th>email</th>
-            <th></th>
-            <th>full name</th>
-            <th></th>
+            <tr>
+                <th>#</th>
+                <th>email</th>
+                <th></th>
+                <th>full name</th>
+                <th></th>
             </tr>
         </thead>
         <% if(users !== null){ %>
@@ -68,19 +67,31 @@
                         </td>
                         <td>
                             <!-- Modal Trigger -->
-                            <a class="waves-effect waves-light btn modal-trigger" href="#modal3">delete</a>
-                            <!-- Modal Structure -->
-                            <div id="modal3" class="modal modal-fixed-footer">
-                                <div class="modal-content">
-                                    <p>User
-                                    </p>
-                                    <input value=""></input>
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">I Agree</a>
-                                </div>
-                            </div>
+                            <a class="waves-effect waves-light btn modal-trigger" href="#modal3<%=i%>">delete</a>
                         </td>
+                        <!-- Modal Structure -->
+                        <div id="modal3<%=i%>" class="modal">
+                            <div class="modal-content">
+                                <p>
+                                    User
+                                    <%= users[i].fullName %> will be deleted, you confirm this action ?
+                                </p>
+                                <form method="POST" action="./users/delete">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input placeholder="userID" name="id" value="<%= users[i]._id %>">
+                                        </div>
+                                        <div>
+                                            <input type="submit" value="delete">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="modal-close waves-effect waves-green btn-flat" style="background-color: #26a69a;">Сancel</a>
+                            </div>
+                        </div>
                     </tr>
                     <% } %>
             </tbody>
