@@ -76,15 +76,12 @@ async function create(req, res, next) {
             throw new ValidationError(error.details);
         }
 
-        const user = await UserService.create(req.body);
-        return res.status(200).json({
-            data: user,
-        });
+        await UserService.create(req.body);
+
+        return res.redirect('/v1/users');
     } catch (error) {
         if (error instanceof ValidationError) {
-            const users = await UserService.findAll();
             res.status(422).render('index.ejs', {
-                users,
                 message: error.name,
                 details: error.message,
             });
@@ -114,11 +111,9 @@ async function updateById(req, res, next) {
             throw new ValidationError(error.details);
         }
 
-        const updatedUser = await UserService.updateById(req.body.id, req.body);
+        await UserService.updateById(req.body.id, req.body);
 
-        return res.status(200).json({
-            data: updatedUser,
-        });
+        return res.redirect('/v1/users');
     } catch (error) {
         if (error instanceof ValidationError) {
             return res.status(422).json({
@@ -151,11 +146,9 @@ async function deleteById(req, res, next) {
             throw new ValidationError(error.details);
         }
 
-        const deletedUser = await UserService.deleteById(req.body.id);
+        await UserService.deleteById(req.body.id);
 
-        return res.status(200).json({
-            data: deletedUser,
-        });
+        return res.redirect('/v1/users');
     } catch (error) {
         if (error instanceof ValidationError) {
             return res.status(422).json({
