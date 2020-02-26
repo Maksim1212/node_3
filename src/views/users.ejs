@@ -44,7 +44,7 @@
                     <!-- Modal Structure -->
                     <div id="modal2 <%=i%>" class="modal">
                         <div class="modal-content">
-                            <form method="POST" action="./users/update">
+                            <form method="POST" action="./update">
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <input type="hidden" placeholder="userID" name="id" value="<%= users[i]._id %>">
@@ -73,7 +73,7 @@
                                 User "
                                 <%= users[i].fullName %>" will be deleted, you confirm this action ?
                             </p>
-                            <form method="POST" action="./users/delete">
+                            <form method="POST" action="./delete">
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <input type="hidden" placeholder="userID" name="id" value="<%= users[i]._id %>">
