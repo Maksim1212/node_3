@@ -49,19 +49,28 @@
                         </td>
                         <td>
                             <!-- Modal Trigger -->
-                            <a class="waves-effect waves-light btn modal-trigger" href="#modal2">update</a>
-                            <!-- Modal Structure -->
-                            <div id="modal2" class="modal modal-fixed-footer">
-                                <div class="modal-content">
-                                    <p>
-                                        <%= i +1 %>
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-                                </div>
-                            </div>
+                            <a class="waves-effect waves-light btn modal-trigger" href="#modal2 <%=i%>">update</a>
                         </td>
+                        <!-- Modal Structure -->
+                        <div id="modal2 <%=i%>" class="modal">
+                            <div class="modal-content">
+                                <p>
+                                    <%= i +1 %>
+                                </p>
+                                <form method="POST" action="./users/update">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input type="hidden" placeholder="userID" name="id" value="<%= users[i]._id %>">
+                                            <input name="fullName" value="<%= users[i].fullName%>" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a class="modal-close waves-effect waves-green btn-flat" style="background-color: #26a69a;">Update</a>
+                                        <input type="submit" value="delete">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <td>
                             <%= users[i].fullName %>
                         </td>
@@ -73,23 +82,20 @@
                         <div id="modal3<%=i%>" class="modal">
                             <div class="modal-content">
                                 <p>
-                                    User
-                                    <%= users[i].fullName %> will be deleted, you confirm this action ?
+                                    User "
+                                    <%= users[i].fullName %>" will be deleted, you confirm this action ?
                                 </p>
                                 <form method="POST" action="./users/delete">
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <input placeholder="userID" name="id" value="<%= users[i]._id %>">
-                                        </div>
-                                        <div>
-                                            <input type="submit" value="delete">
+                                            <input type="hidden" placeholder="userID" name="id" value="<%= users[i]._id %>">
                                         </div>
                                     </div>
-
+                                    <div class="modal-footer">
+                                        <a class="modal-close waves-effect waves-green btn-flat" style="background-color: #26a69a;">Сancel</a>
+                                        <input type="submit" value="delete">
+                                    </div>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <a class="modal-close waves-effect waves-green btn-flat" style="background-color: #26a69a;">Сancel</a>
                             </div>
                         </div>
                     </tr>
@@ -97,7 +103,6 @@
             </tbody>
             <% } %>
     </table>
-
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -106,7 +111,6 @@
             $('.modal').modal();
         });
     </script>
-
 </body>
 
 </html>
