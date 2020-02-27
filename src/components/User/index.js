@@ -2,6 +2,8 @@ const UserService = require('./service');
 const UserValidation = require('./validation');
 const ValidationError = require('../../error/ValidationError');
 
+const dbError = 'MongoError: E11000 duplicate key error collection';
+const defaultError = 'An error has occurred';
 /**
  * @function
  * @param {express.Request} req
@@ -19,9 +21,9 @@ async function findAll(req, res, next) {
             errors: req.flash('error'),
         });
     } catch (error) {
-        req.flash('error', ('data error'));
+        req.flash('error', { message: defaultError });
 
-        next(error);
+        return next(error);
     }
 }
 
@@ -84,8 +86,8 @@ async function create(req, res, next) {
             req.flash('error', error.message);
             return res.redirect('/v1/users');
         }
-        if (error.code === 11000) {
-            req.flash('error', error.message);
+        if (error.name === 'MongoError') {
+            req.flash('error', { message: dbError });
             return res.redirect('/v1/users');
         }
         return next(error);
@@ -115,8 +117,8 @@ async function updateById(req, res, next) {
             req.flash('error', error.message);
             return res.redirect('/v1/users');
         }
-        if (error.code === 11000) {
-            req.flash('error', error.message);
+        if (error.name === 'MongoError') {
+            console.log(req.flash('error', { message: defaultError }));
             return res.redirect('/v1/users');
         }
 
@@ -145,6 +147,10 @@ async function deleteById(req, res, next) {
     } catch (error) {
         if (error instanceof ValidationError) {
             req.flash('error', error.message);
+            return res.redirect('/v1/users');
+        }
+        if (error.name === 'MongoError') {
+            console.log(req.flash('error', { message: defaultError }));
             return res.redirect('/v1/users');
         }
         return next(error);
