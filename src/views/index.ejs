@@ -10,12 +10,10 @@
 
 <body>
     <% if (typeof errors !== 'undefined') { %>
-        <div style="text-align: center;color: darkred;">
-            <% for( i = 0; i < errors.lenth; i++){%>
-                <p>
-                    <%= errors.messages[i] %>
-                </p>
-                <% } %>
+        <div style="text-align: center;color: rgb(238, 6, 6);">
+            <% errors.forEach(error => { %>
+                <%= error.message %>
+                    <% }) %>
         </div>
         <% } %>
             <%- include('users.ejs') %>
