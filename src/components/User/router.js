@@ -1,5 +1,9 @@
 const { Router } = require('express');
+const csrf = require('csurf');
 const UserComponent = require('../User');
+
+const csrfProtection = csrf({ cookie: true });
+
 
 /**
  * Express router to mount user related functions on.
@@ -16,7 +20,7 @@ const router = Router();
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware.
  */
-router.get('/', UserComponent.findAll);
+router.get('/', csrfProtection, UserComponent.findAll);
 
 /**
  * Route serving a user
@@ -26,7 +30,7 @@ router.get('/', UserComponent.findAll);
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware.
  */
-router.get('/:id', UserComponent.findById);
+router.get('/:id', csrfProtection, UserComponent.findById);
 
 /**
  * Route serving a new user
@@ -37,7 +41,7 @@ router.get('/:id', UserComponent.findById);
  * @param {callback} middleware - Express middleware
  */
 // router.post('/create', UserComponent.create);
-router.post('/', UserComponent.create);
+router.post('/', csrfProtection, UserComponent.create);
 /**
  * Route serving a new user
  * @name /v1/users
@@ -46,7 +50,7 @@ router.post('/', UserComponent.create);
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware
  */
-router.put('/', UserComponent.updateById);
+router.put('/', csrfProtection, UserComponent.updateById);
 
 /**
  * Route serving a new user
@@ -56,6 +60,6 @@ router.put('/', UserComponent.updateById);
  * @param {string} path -Express path
  * @param {callback} middleware - Express middleware
  */
-router.delete('/', UserComponent.deleteById);
+router.delete('/', csrfProtection, UserComponent.deleteById);
 
 module.exports = router;

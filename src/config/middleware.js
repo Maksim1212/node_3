@@ -5,9 +5,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
 const methodOverride = require('method-override');
-const flash = require('connect-flash');
 const session = require('express-session');
-
+const flash = require('connect-flash');
 
 module.exports = {
     /**

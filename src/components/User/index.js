@@ -12,11 +12,14 @@ const ValidationError = require('../../error/ValidationError');
 async function findAll(req, res, next) {
     try {
         const users = await UserService.findAll();
-        res.status(200).render('index.ejs', { users });
-    } catch (error) {
-        req.flash('error', {
-            message: error,
+
+        return res.render('index.ejs', {
+            users,
+            csrfToken: req.csrfToken(),
+            errors: req.flash('error'),
         });
+    } catch (error) {
+        req.flash('error', ('data error'));
 
         next(error);
     }
@@ -75,17 +78,15 @@ async function create(req, res, next) {
         }
 
         await UserService.create(req.body);
-
         return res.redirect('/v1/users');
     } catch (error) {
         if (error instanceof ValidationError) {
-            req.flash('error', error.message);
+            // req.flash('error', 'validation error');
+            res.render('index.ejs', { messages: req.flash('validation error') });
             return res.redirect('/v1/users');
         }
 
-        res.flash('error', {
-            message: error,
-        });
+        res.flash('error', ('Something went wrong'));
         res.redirect('v1/users');
         return next(error);
     }
@@ -111,10 +112,8 @@ async function updateById(req, res, next) {
         return res.redirect('/v1/users');
     } catch (error) {
         if (error instanceof ValidationError) {
-            return res.status(422).json({
-                message: error.name,
-                details: error.message,
-            });
+            req.flash('error', error.message);
+            return res.redirect('/v1/users');
         }
 
         res.status(500).json({

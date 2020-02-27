@@ -11,8 +11,9 @@
                 <form method="POST" action="/v1/users">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="email" name="email">
-                            <input placeholder="user Full Name" name="fullName">
+                            <input placeholder="email" name="email" type="email">
+                            <input placeholder="user Full Name" name="fullName" type="text">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -53,6 +54,7 @@
                                     <div class="input-field col s6">
                                         <input type="hidden" placeholder="userID" name="id" value="<%= users[i]._id %>">
                                         <input placeholder="user Full Name" name="fullName" value="<%= users[i].fullName%>" type="text">
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -81,6 +83,7 @@
                                 <div class="row">
                                     <div class="input-field col s6">
                                         <input type="hidden" placeholder="userID" name="id" value="<%= users[i]._id %>">
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
